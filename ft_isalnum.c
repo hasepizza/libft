@@ -6,15 +6,15 @@
 /*   By: mohasega <mohasega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:14:37 by mohasega          #+#    #+#             */
-/*   Updated: 2025/04/25 16:34:40 by mohasega         ###   ########.fr       */
+/*   Updated: 2025/05/07 16:50:04 by mohasega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 int	ft_isalnum(int c)
 {
-	if (ft_isalpha(c) || ft_isdight(c))
+	if (ft_isalpha(c) || ft_isdigit(c))
 	{
 		return (1);
 	}
