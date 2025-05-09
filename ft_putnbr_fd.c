@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mohasega <mohasega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 21:40:09 by mohasega          #+#    #+#             */
-/*   Updated: 2025/05/09 15:25:23 by mohasega         ###   ########.fr       */
+/*   Created: 2025/05/09 14:58:56 by mohasega          #+#    #+#             */
+/*   Updated: 2025/05/09 15:07:47 by mohasega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isdigit(int c)
+void	ft_putnbr_fd(int n, int fd)
 {
-	if (c >= 0 && c <= 9)
+	char	c;
+
+	if (n == -2147483648)
 	{
-		return (1);
+		write (fd, "-2147483648", 11);
+		return ;
 	}
-	return (0);
+	if (n < 0)
+	{
+		write (fd, "-", 1);
+		ft_putnbr_fd(-n, fd);
+		return ;
+	}
+	if (n >= 10)
+		ft_putnbr_fd(n / 10, fd);
+	c = '0' + (n % 10);
+	write (fd, &c, 1);
 }
-
-//#include <stdio.h>
-
-//int	main(void)
-//{
-//	printf("A: %d\n", ft_isdigit('A'));
-//	printf("1; %d\n", ft_isdigit(1));
-//}
