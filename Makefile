@@ -22,27 +22,27 @@ CFLAGS = -Wall -Wextra -Werror
 AR = ar
 RANLIB = ranlib
 
-# オブジェクトファイル名のリスト
+
 OBJS = $(SRC:.c=.o)
 
-# all ターゲット
+
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(AR) rc $@ $^
 	$(RANLIB) $@
 
-# .c -> .o の変換ルール
+
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# 中間ファイルの削除
+
 clean:
 	rm -f $(OBJS)
 
-# 完全なクリーン
+
 fclean:
 	rm -f $(NAME)
 
-# 再ビルド
+
 re: fclean all
