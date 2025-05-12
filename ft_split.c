@@ -6,7 +6,7 @@
 /*   By: mohasega <mohasega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:40:06 by mohasega          #+#    #+#             */
-/*   Updated: 2025/05/06 18:41:50 by mohasega         ###   ########.fr       */
+/*   Updated: 2025/05/12 11:42:11 by mohasega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,16 @@ static int	count_words(const char *s, char c)
 	int	in_word;
 
 	count = 0;
+	in_word = 0;
 	while (*s)
 	{
-		if (*s == c)
-			in_word = 0;
-		else if (!in_word)
+		if (*s != c && in_word == 0)
 		{
 			in_word = 1;
 			count++;
 		}
+		else if (*s == c)
+			in_word = 0;
 		s++;
 	}
 	return (count);
@@ -37,7 +38,7 @@ static char	*get_next_word(char const *s, char c, size_t *start)
 	size_t	end;
 	char	*word;
 
-	while (s[*start] == c)
+	while (s[*start] && s[*start] == c)
 		(*start)++;
 	end = *start;
 	while (s[end] && s[end] != c)
@@ -45,6 +46,13 @@ static char	*get_next_word(char const *s, char c, size_t *start)
 	word = ft_substr(s, *start, end - *start);
 	*start = end;
 	return (word);
+}
+
+static void	free_words(char **arr, int i)
+{
+	while (i-- > 0)
+		free(arr[i]);
+	free(arr);
 }
 
 static int	fill_words(char **result, const char *s, char c, int words)
@@ -59,12 +67,12 @@ static int	fill_words(char **result, const char *s, char c, int words)
 		result[i] = get_next_word(s, c, &start);
 		if (!result[i])
 		{
-			while (i-- > 0)
-				free(result[i]);
+			free_words(result, i);
 			return (0);
 		}
 		i++;
 	}
+	result [i] = NULL;
 	return (1);
 }
 
@@ -79,7 +87,6 @@ char	**ft_split(char const *s, char c)
 	result = (char **)malloc((words + 1) * sizeof(char *));
 	if (!result)
 		return (NULL);
-	result[words] = NULL;
 	if (!fill_words(result, s, c, words))
 		return (NULL);
 	return (result);

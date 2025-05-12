@@ -6,7 +6,7 @@
 /*   By: mohasega <mohasega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:42:54 by mohasega          #+#    #+#             */
-/*   Updated: 2025/05/06 17:42:58 by mohasega         ###   ########.fr       */
+/*   Updated: 2025/05/12 11:05:07 by mohasega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (end > start && ft_strchr(set, s1[end]))
 		end--;
 	len = end - start + 1;
-	trimmed_str = malloc(len - 1);
+	trimmed_str = malloc(len + 1);
 	if (!trimmed_str)
 		return (NULL);
 	ft_strlcpy(trimmed_str, (char *)(s1 + start), len + 1);
