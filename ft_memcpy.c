@@ -6,7 +6,7 @@
 /*   By: mohasega <mohasega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 10:59:53 by mohasega          #+#    #+#             */
-/*   Updated: 2025/04/29 11:18:20 by mohasega         ###   ########.fr       */
+/*   Updated: 2025/05/13 16:49:36 by mohasega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	unsigned char	*s;
 	size_t			i;
 
+	if (dest == NULL && src == NULL)
+		return (NULL);
 	d = (unsigned char *)dest;
 	s = (unsigned char *)src;
 	i = 0;
